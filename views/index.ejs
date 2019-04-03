@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Student Attendence</title>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="./validate.js"></script>
+    <style>
+        .modal {
+            max-height: 100%;
+            overflow: visible
+        }
+    </style>
+</head>
+
+<body>
+<div class="row"></div>
+<div class="row"></div>
+<div class="row"></div>
+<div class="row"></div>
+<div class="row"></div>
+<div class="row"></div>
+<div class="row"></div>
+<div class="row"></div>
+<div class="row"></div>
+<div class="row"></div>
+<div class="row"></div>
+<div class="row"></div>
+<div class="row"></div>
+<div class="row"></div>
+                <div class="col s12 m6 l4">
+                    <p>
+
+                    </p>
+                </div>
+    <div class="row">
+        <div class="col s6 ">
+            <div class="card-panel ">
+                <div class="row">
+                    <form class="col s12">
+
+                        <div class="input-field col s12">
+                            <input placeholder="Enter RAIL ID" id="labId" type="text" class="validate">
+                            <label for="railId">RAIL ID</label>
+                        </div>
+
+                        <div class="row">
+                            <div class="col s6 center-align">
+                                <a class="waves-effect waves-light btn modal-trigger" href="#login">Login</a>
+                            </div>
+                            <div class="col s6 center-align">
+                                <a class="waves-effect waves-light btn" onclick="logout()">Logout</a>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row section">
+        <div class="row">
+
+            <div id="login" class="modal">
+                <div class="modal-content">
+                    <h4 class="center-align">Login</h4>
+                    <div class="input-field col s12">
+                        <select id="teamId">
+                            <option value="" disabled selected>Select Your Team</option>
+                            <% teamDetails.forEach(function(team){ %>
+                            <option value="<%=team.value%>"><%=team.name%></option>
+                            <% }) %>
+                        </select>
+                        <label>Team</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <textarea id="purpose" class="materialize-textarea"></textarea>
+                        <label for="purpose">Enter Project Disciption</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row center-align">
+                        <a class="modal-action modal-close waves-effect waves-green btn center-align"
+                          onclick="login();" ><i class="material-icons right">send</i>Login</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+</div>
+
+
+
+        <script>  
+        $(document).ready(function () {
+
+                $('.modal-trigger').leanModal();
+            });
+
+            $(document).ready(function () {
+                $('select').material_select();
+            });
+
+
+    var rail_id; 
+    var current_team; 
+    var purpose;
+    var type; 
+
+            function ajax() {
+                var request = new XMLHttpRequest();
+
+               if(type==1){
+                    request.open("POST", "http://localhost:8080/attendence/?"+"rail_id="+ rail_id + "&current_team="+ current_team+ "&purpose=" + purpose  +"&type=" + "1"  , true);
+                    request.send();
+                }
+                else if(type==2){
+                    request.open("POST", "http://localhost:8080/?" + "rail_id=" + rail_id +"&type=2", true);
+                    request.send();
+                }
+            }
+
+            function login() {
+                    rail_id = document.getElementById('labId').value;
+                    if (rail_id.slice(0, 3) == "RSK") {
+                        rail_id = document.getElementById('labId').value.toUpperCase();
+                        current_team = document.getElementById('teamId').value;
+                        purpose = document.getElementById('purpose').value.toUpperCase();
+                        type = 1;
+                        ajax();
+                    }
+                    else {
+                        window.alert("Enter Valid RAIL ID");
+                    }
+                }
+
+
+                function logout() {
+                    rail_id = "document.getElementById('labId').value";
+                    if (rail_id.slice(0, 3) == "RSK") {
+                        rail_id = document.getElementById('labId').value.toUpperCase();
+                        type = 2;
+                        ajax();
+                    }
+                    else {
+                        window.alert("Enter Valid RAIL ID");
+                    }
+                }
+
+
+
+
+
+
+        </script>
+
+</html>
