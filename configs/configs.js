@@ -16,23 +16,11 @@ module.exports = {
     },
     "details": {
         "s1": {
-            "slno": "slno",
-            "labId": "rail_id",
-            "studentName": "student_name",
-            "gender": "gender",
-            "dob": "date_of_birth",
-            "time_of_joining_lab": "time_of_joining_rail",
-            "phone_number": "phone_number",
-            "email": "email",
-            "associated_team": "associated_team",
-            "projects_done": "projects_done",
-            "branch": "branch",
-            "login_status": "login_status",
-            "component_status": "component_status",
-            "usn": "usn",
-            "time_in_lab": "time_in_rail",
-            "most_recent_login": "most_recent_login",
-            "current_highest_role": "current_highest_role"
+            "Fields": ["slno","rail_id","student_name","gender","date_of_birth",
+                       "time_of_joining_rail","phone_number","email","associated_team",
+                       "projects_done","login_status","component_status","usn",
+                       "time_in_rail","most_recent_login","current_highest_role"]
+           "dep": "null"
         },
 
         "s2": {
